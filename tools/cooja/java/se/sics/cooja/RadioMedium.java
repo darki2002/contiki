@@ -100,10 +100,10 @@ public abstract class RadioMedium {
    * Adds an observer which is notified each time a radio connection has finished.
    *
    * @see #getLastConnection()
-   * @see #deleteRadioMediumObserver(Observer)
+   * @see #deleteObserver(Observer)
    * @param observer New observer
    */
-  public abstract void addRadioMediumObserver(Observer observer);
+  public abstract void addObserver(Observer observer);
 
   /**
    * @return Radio medium observable
@@ -113,11 +113,11 @@ public abstract class RadioMedium {
   /**
    * Deletes an radio medium observer.
    *
-   * @see #addRadioMediumObserver(Observer)
+   * @see #addObserver(Observer)
    * @param observer
    *          Observer to delete
    */
-  public abstract void deleteRadioMediumObserver(Observer observer);
+  public abstract void deleteObserver(Observer observer);
 
   /**
    * @return Last radio connection finished in the radio medium
