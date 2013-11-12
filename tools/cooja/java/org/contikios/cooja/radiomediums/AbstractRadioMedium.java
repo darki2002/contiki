@@ -454,7 +454,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 		updateSignalStrengths();
 	}
 	
-	public void addRadioMediumObserver(Observer observer) {
+	public void addObserver(Observer observer) {
 		radioMediumObservable.addObserver(observer);
 	}
 	
@@ -462,7 +462,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 		return radioMediumObservable;
 	}
 	
-	public void deleteRadioMediumObserver(Observer observer) {
+	public void deleteObserver(Observer observer) {
 		radioMediumObservable.deleteObserver(observer);
 	}
 	
