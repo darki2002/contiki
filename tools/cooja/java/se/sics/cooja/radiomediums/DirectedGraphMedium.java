@@ -35,6 +35,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.WeakHashMap;
 
@@ -71,8 +72,8 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
 
   private ArrayList<Edge> edges = new ArrayList<Edge>();
   private boolean edgesDirty = true;
-  private WeakHashMap<Radio, Double> baseRssi = new WeakHashMap<Radio, Double>();
-  private WeakHashMap<Radio, Double> sendRssi = new WeakHashMap<Radio, Double>();
+  private Map<Radio, Double> baseRssi = java.util.Collections.synchronizedMap(new WeakHashMap<Radio, Double>());
+  private Map<Radio, Double> sendRssi = java.util.Collections.synchronizedMap(new WeakHashMap<Radio, Double>());
 
   /* Used for optimizing lookup time */
   private Hashtable<Radio,DGRMDestinationRadio[]> edgesTable = new Hashtable<Radio,DGRMDestinationRadio[]>();
@@ -179,7 +180,13 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
    * @param rssi The RSSI value to set during silence
    */
   public void setBaseRssi(Radio radio, double rssi) {
-    baseRssi.put(radio, rssi);    
+    baseRssi.put(radio, rssi);
+    simulation.invokeSimulationThread(new Runnable() {				
+		@Override
+		public void run() {
+			updateSignalStrengths();
+		}
+	});
   }
   
   /**
