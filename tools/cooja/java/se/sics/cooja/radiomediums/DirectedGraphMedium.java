@@ -47,7 +47,6 @@ import se.sics.cooja.Mote;
 import se.sics.cooja.RadioConnection;
 import se.sics.cooja.Simulation;
 import se.sics.cooja.interfaces.Radio;
-import se.sics.cooja.plugins.DGRMConfigurator;
 import se.sics.cooja.plugins.Visualizer;
 import se.sics.cooja.plugins.skins.DGRMVisualizerSkin;
 
@@ -92,7 +91,6 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
     requestEdgeAnalysis();
 
     /* Register plugin and visualizer skin */
-    simulation.getGUI().registerPlugin(DGRMConfigurator.class);
     Visualizer.registerVisualizerSkin(DGRMVisualizerSkin.class);
   }
 
@@ -100,7 +98,6 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
     super.removed();
 
     /* Unregister plugin and visualizer skin */
-    simulation.getGUI().unregisterPlugin(DGRMConfigurator.class);
     Visualizer.unregisterVisualizerSkin(DGRMVisualizerSkin.class);
   }
 
