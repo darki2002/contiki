@@ -80,7 +80,6 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
   public DirectedGraphMedium() {
     /* Do not initialize radio medium: use only for hash table */
     super(null);
-    Visualizer.registerVisualizerSkin(DGRMVisualizerSkin.class);
   }
 
   public DirectedGraphMedium(Simulation simulation) {
@@ -89,16 +88,10 @@ public class DirectedGraphMedium extends AbstractRadioMedium {
     random = simulation.getRandomGenerator();
 
     requestEdgeAnalysis();
-
-    /* Register plugin and visualizer skin */
-    Visualizer.registerVisualizerSkin(DGRMVisualizerSkin.class);
   }
 
   public void removed() {
     super.removed();
-
-    /* Unregister plugin and visualizer skin */
-    Visualizer.unregisterVisualizerSkin(DGRMVisualizerSkin.class);
   }
 
   public void addEdge(Edge e) {
