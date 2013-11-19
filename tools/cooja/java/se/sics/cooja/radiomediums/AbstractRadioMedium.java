@@ -91,8 +91,17 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 			notifyObservers();
 		}
 	}
+	public class RadioMediumObservable extends Observable {
+		public void setRadioMediumChanged() {
+			setChanged();
+		}
+		public void setRadioMediumChangedAndNotify() {
+			setChanged();
+			notifyObservers();
+		}
+	}
 	
-	
+	private RadioMediumObservable radioMediumObservable = new RadioMediumObservable();
 	private RadioTransmissionObservable radioTransmissionObservable = new RadioTransmissionObservable();
 	
 	/**
@@ -435,6 +444,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 		
 		registeredRadios.add(radio);
 		radio.addObserver(radioEventsObserver);
+		radioMediumObservable.setRadioMediumChangedAndNotify();
 		
 		/* Update signal strengths */
 		updateSignalStrengths();
@@ -448,6 +458,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 		
 		radio.deleteObserver(radioEventsObserver);
 		registeredRadios.remove(radio);
+		radioMediumObservable.setRadioMediumChangedAndNotify();
 		
 		removeFromActiveConnections(radio);
 		
@@ -464,6 +475,18 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 	}
 	
 	public void deleteRadioTransmissionObserver(Observer observer) {
+		radioTransmissionObservable.deleteObserver(observer);
+	}
+	
+	public void addRadioMediumObserver(Observer observer) {
+		radioTransmissionObservable.addObserver(observer);
+	}
+	
+	public Observable getRadioMediumObservable() {
+		return radioTransmissionObservable;
+	}
+	
+	public void deleteRadioMediumObserver(Observer observer) {
 		radioTransmissionObservable.deleteObserver(observer);
 	}
 	
