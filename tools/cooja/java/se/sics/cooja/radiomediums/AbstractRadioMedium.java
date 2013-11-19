@@ -82,17 +82,18 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 	public int COUNTER_RX = 0;
 	public int COUNTER_INTERFERED = 0;
 	
-	public class RadioMediumObservable extends Observable {
-		public void setRadioMediumChanged() {
+	public class RadioTransmissionObservable extends Observable {
+		public void setRadioTransmissionChanged() {
 			setChanged();
 		}
-		public void setRadioMediumChangedAndNotify() {
+		public void setRadioTransmissionChangedAndNotify() {
 			setChanged();
 			notifyObservers();
 		}
 	}
 	
-	private RadioMediumObservable radioMediumObservable = new RadioMediumObservable();
+	
+	private RadioTransmissionObservable radioTransmissionObservable = new RadioTransmissionObservable();
 	
 	/**
 	 * This constructor should always be called from implemented radio mediums.
@@ -279,7 +280,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 					
 					/* Notify observers */
 					lastConnection = null;
-					radioMediumObservable.setRadioMediumChangedAndNotify();
+					radioTransmissionObservable.setRadioTransmissionChangedAndNotify();
 				}
 				break;
 				case TRANSMISSION_FINISHED: {
@@ -321,7 +322,7 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 					updateSignalStrengths();
 					
 					/* Notify observers */
-					radioMediumObservable.setRadioMediumChangedAndNotify();
+					radioTransmissionObservable.setRadioTransmissionChangedAndNotify();
 				}
 				break;
 				case CUSTOM_DATA_TRANSMITTED: {
@@ -454,16 +455,16 @@ public abstract class AbstractRadioMedium extends RadioMedium {
 		updateSignalStrengths();
 	}
 	
-	public void addRadioMediumObserver(Observer observer) {
-		radioMediumObservable.addObserver(observer);
+	public void addRadioTransmissionObserver(Observer observer) {
+		radioTransmissionObservable.addObserver(observer);
 	}
 	
-	public Observable getRadioMediumObservable() {
-		return radioMediumObservable;
+	public Observable getRadioTransmissionObservable() {
+		return radioTransmissionObservable;
 	}
 	
-	public void deleteRadioMediumObserver(Observer observer) {
-		radioMediumObservable.deleteObserver(observer);
+	public void deleteRadioTransmissionObserver(Observer observer) {
+		radioTransmissionObservable.deleteObserver(observer);
 	}
 	
 	public RadioConnection getLastConnection() {

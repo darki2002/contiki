@@ -493,7 +493,7 @@ public class RadioLogger extends VisPlugin {
     adjuster.setDynamicAdjustment(true);
     adjuster.packColumns();
 
-    radioMedium.addRadioMediumObserver(radioMediumObserver = new Observer() {
+    radioMedium.addRadioTransmissionObserver(radioMediumObserver = new Observer() {
       public void update(Observable obs, Object obj) {
         RadioConnection conn = radioMedium.getLastConnection();
         if (conn == null) {
@@ -762,7 +762,7 @@ public class RadioLogger extends VisPlugin {
 
   public void closePlugin() {
     if (radioMediumObserver != null) {
-      radioMedium.deleteRadioMediumObserver(radioMediumObserver);
+      radioMedium.deleteRadioTransmissionObserver(radioMediumObserver);
     }
   }
 
